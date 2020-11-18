@@ -1,0 +1,22 @@
+[Unit]
+Description=Syncthing
+Documentation=https://docs.syncthing.net/users/autostart.html#using-systemd
+After=network.target
+
+[Service]
+User=root
+ExecStart=/usr/local/bin/syncthing -no-browser -no-restart -logflags=0 -home=/etc/syncthing
+Restart=on-failure
+SuccessExitStatus=3 4
+RestartForceExitStatus=3 4
+
+# Hardening
+ProtectSystem=full
+PrivateTmp=true
+SystemCallArchitectures=native
+MemoryDenyWriteExecute=true
+NoNewPrivileges=true
+ReadWriteDirectories=/etc/syncthing /usr/local/bin
+
+[Install]
+WantedBy=multi-user.target

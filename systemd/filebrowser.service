@@ -1,0 +1,9 @@
+[Unit]
+Description=FileBrowser
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/filebrowser -d /etc/filebrowser/filebrowser.db
+
+[Install]
+WantedBy=multi-user.target
