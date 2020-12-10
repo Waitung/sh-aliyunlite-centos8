@@ -272,7 +272,7 @@ install_cloudreve(){
     timeout 3 cloudreve | tee ~/sh/cloudreve.info
     cloudreve_password=`grep 初始管理员密码： ~/sh/cloudreve.info | cut -d： -f2`
     mkdir /etc/cloudreve
-    sed -i "s#Listen = :5212#Listen = :2201#g" /usr/local/bin/conf.ini
+    sed -i "s#Listen =.*#Listen = /run/cloudreve/cloudreve.sock#g" /usr/local/bin/conf.ini
     echo "[Database]" >> /usr/local/bin/conf.ini
     echo "DBFile = /etc/cloudreve/cloudreve.db" >> /usr/local/bin/conf.ini
     mv /usr/local/bin/conf.ini /etc/cloudreve
