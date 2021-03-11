@@ -76,7 +76,7 @@ get_version_caddy(){
 get_version_filebrowser(){
     object="/usr/local/bin/filebrowser"
     determine
-    new_version=`curl -s https://api.github.com/repos/filebrowser/filebrowser/releases/latest | grep 'tag_name' | cut -d\" -f4`
+    new_version=`curl -s https://api.github.com/repos/Waitung/FileBrowser-DailyBuild/releases/latest | grep 'tag_name' | cut -d\" -f4`
     old_version=`filebrowser version | cut -d" " -f3 | cut -d/ -f1`
     echo -e "\n===== FileBwoser =====\n"
 }
@@ -118,14 +118,11 @@ update_filebrowser(){
     if  [ -n "${s_version}" ] ;then new_version=${s_version}; fi
     rm -f /usr/local/bin/filebrowser.old
     mv /usr/local/bin/filebrowser /usr/local/bin/filebrowser.old
-    wget https://github.com/filebrowser/filebrowser/releases/download/${new_version}/linux-amd64-filebrowser.tar.gz
-    mkdir ./filebrowser
-    tar -xzvf linux-amd64-filebrowser.tar.gz -C ./filebrowser
-    mv ./filebrowser/filebrowser /usr/local/bin
+    wget https://github.com/Waitung/FileBrowser-DailyBuild/releases/download/${new_version}/linux-amd64-filebrowser.zip
+    unzip linux-amd64-filebrowser.zip -d /usr/local/bin
     chown root:root /usr/local/bin/filebrowser
     chmod 755 /usr/local/bin/filebrowser
-    rm -rf ./filebrowser
-    rm -f linux-amd64-filebrowser.tar.gz
+    rm -f linux-amd64-filebrowser.zip
     systemctl restart filebrowser
     systemctl status filebrowser -l
     get_date
